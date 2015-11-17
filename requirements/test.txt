@@ -1,0 +1,12 @@
+########################
+# Testing requirements #
+########################
+-r base.txt
+
+# static testing
+coverage==3.7.1
+django-nose==1.4.1
+nose==1.3.7
+django-test-plus==1.0.9
+flake8==2.4.1
+

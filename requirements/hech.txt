@@ -1,0 +1,4 @@
+-r base.txt
+aiohttp==0.16.6
+chardet==2.3.0
+gunicorn==19.3.0

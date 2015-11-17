@@ -1,0 +1,28 @@
+"""
+Development server configuration
+
+"""
+from dbservice.settings.base import *    # noqa # pylint: disable=W0614,W0401
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+MEDIA_ROOT = os.path.join(VAR_ROOT, 'uploads')
+STATIC_ROOT = os.path.join(VAR_ROOT, 'static')
+
+ADMINS = (
+    ('Donald Duck', 'donald@duck.quack'),
+)
+MANAGERS = ADMINS
+
+ALLOWED_HOSTS = get_secret('ALLOWED_HOSTS')
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dbservice',
+    }
+}
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = get_secret('SECRET_KEY')
+
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')

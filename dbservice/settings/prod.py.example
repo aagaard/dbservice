@@ -1,0 +1,40 @@
+"""
+Production server configuration
+
+"""
+from dbservice.settings.base import *  # noqa
+
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    ('Donald Duck', 'donald@duck.quack'),
+)
+MANAGERS = ADMINS
+
+ALLOWED_HOSTS = get_secret('ALLOWED_HOSTS')
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': get_secret('DATABASE_NAME'),
+        'USER': get_secret('DATABASE_USER'),
+        'PASSWORD': get_secret('DATABASE_PASSWORD'),
+        'HOST': get_secret('DATABASE_HOST'),
+    }
+}
+
+# Debug toolbar:
+INTERNAL_IPS = ('127.0.0.1',)
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
+
+SECRET_KEY = get_secret('SECRET_KEY')
+
+EMAIL_HOST = get_secret('EMAIL_HOST')
+EMAIL_HOST_PASSWORD = get_secret('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = get_secret('EMAIL_HOST_USER')
+EMAIL_PORT = '465'
+EMAIL_USE_SSL = True
+
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
