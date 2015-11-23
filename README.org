@@ -29,26 +29,25 @@
 
   #+BEGIN_SRC json
     {
-        'previous': None,
-        'next': 'http://localhost:8000/api/v1/homes/residential_homes/7/get_energy_consumption/?tau=hourly&page=2&to_timestamp=20150907&from_timestamp=20150903',
-        'count': 22,
-        'results': [
+        "previous": None,
+        "next": "http://localhost:8000/api/v1/homes/residential_homes/7/get_energy_consumption/?tau=hourly&page=2&to_timestamp=20150907&from_timestamp=20150903",
+        "count": 22,
+        "results": [
             {
-                'to_timestamp': '2015-09-03T15:00:00',
-                'from_timestamp': '2015-09-03T14:00:00',
-                'value': 106985
+                "to_timestamp": "2015-09-03T15:00:00",
+                "from_timestamp": "2015-09-03T14:00:00",
+                "value": 106985
             },
             {
-                'to_timestamp': '2015-09-03T16:00:00',
-                'from_timestamp': '2015-09-03T15:00:00',
-                'value': 413012
+                "to_timestamp": "2015-09-03T16:00:00",
+                "from_timestamp": "2015-09-03T15:00:00",
+                "value": 413012
             },
             {
-                'to_timestamp': '2015-09-03T17:00:00',
-                'from_timestamp': '2015-09-03T16:00:00',
-                'value': 161988
+                "to_timestamp": "2015-09-03T17:00:00",
+                "from_timestamp": "2015-09-03T16:00:00",
+                "value": 161988
             },
-                ...
         ]
     }
   #+END_SRC
@@ -62,3 +61,38 @@
 
    - A set of analytic functions useful for get common views of electric meter
      data.
+
+** Installation
+   
+   Install Ubuntu packages:
+   #+BEGIN_SRC sh
+     sudo apt-get install git python-pip postgresql python-virtualenv python-dev libpq-dev
+   #+END_SRC
+
+   Grant database privileges to current user and create dbservice database:
+   #+BEGIN_SRC sh
+     sudo -u postgres createuser --superuser $USER
+     createdb --encoding=utf-8 dbservice
+   #+END_SRC
+
+   Get the DB&A:
+   #+BEGIN_SRC sh
+     git clone git@github.com:dbservice/dbservice.git
+     cd dbservice
+   #+END_SRC
+   
+   Set up development environment using virtualenv:
+   #+BEGIN_SRC sh
+     virtualenv --python=$(which python3.4) dbservice
+     source dbservice/bin/activate
+     cd path/to/dbservice/repository
+     pip install -r requirements.txt
+   #+END_SRC
+
+*** Bootstrap the project
+    To bootstrap the dbservice project, you will have to setup a local configuration:
+    #+BEGIN_SRC sh
+      cp dbservice/settings/local.py.example dbservice/settings/local.py
+      ./manage.py migrate
+      ./manage.py createsuperuser
+    #+END_SRC
