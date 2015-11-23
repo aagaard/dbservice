@@ -29,7 +29,7 @@
 
   #+BEGIN_SRC json
     {
-        "previous": None,
+        "previous": null,
         "next": "http://localhost:8000/api/v1/homes/residential_homes/7/get_energy_consumption/?tau=hourly&page=2&to_timestamp=20150907&from_timestamp=20150903",
         "count": 22,
         "results": [
