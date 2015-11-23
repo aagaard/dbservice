@@ -25,7 +25,7 @@
     result = requests.request('GET', base_url + relative_url + params,
                               headers={'Authorization': 'JWT ' + jwt_token})
   #+END_SRC
-  Where the default result is a JSON formatted structure with the result:
+  Where the default result is a JSON formatted response:
   #+BEGIN_SRC json
     {
         "previous": null,
