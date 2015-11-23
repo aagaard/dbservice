@@ -1,0 +1,64 @@
+#+OPTIONS: toc:nil
+
+* DB&A: A Web Service for Meter Data Management
+
+  Meter Data Management (MDM) refers to the process of storing meter data
+  sent by sensors monitoring the electric grid and provide operational
+  interfaces for administration. 
+
+  The Database & Analytics (DB&A) is provided as /reference implementation/ for
+  MDM and is implemented as a web service. It contains a number of analytic
+  interfaces that are useful for other services to get a particular "view" of
+  the data. Furthermore, it is based on Django 1.7.4 and Django REST Framework
+  2.4.4 (we hope to update the DB&A to a recent version of Django and DRF).
+
+  Below you can see an example on how to query the web service using [[http://docs.python-requests.org/en/latest/][requests]]
+  when it is up and running on =localhost= and you have obtained an API token:
+  #+BEGIN_SRC python
+    import requests
+
+    jwt_token = '<api-token>'
+    base_url = 'http://localhost:8000/api/v1/homes/'
+    relative_url = 'residential_homes/7/get_energy_consumption/'
+    params = '?from_timestamp=20150903&to_timestamp=20150907&tau=hourly'
+
+    result = requests.request('GET', base_url + relative_url + params,
+                              headers={'Authorization': 'JWT ' + jwt_token})
+    print(result.json())
+  #+END_SRC
+
+  #+BEGIN_SRC json
+    {
+        'previous': None,
+        'next': 'http://localhost:8000/api/v1/homes/residential_homes/7/get_energy_consumption/?tau=hourly&page=2&to_timestamp=20150907&from_timestamp=20150903',
+        'count': 22,
+        'results': [
+            {
+                'to_timestamp': '2015-09-03T15:00:00',
+                'from_timestamp': '2015-09-03T14:00:00',
+                'value': 106985
+            },
+            {
+                'to_timestamp': '2015-09-03T16:00:00',
+                'from_timestamp': '2015-09-03T15:00:00',
+                'value': 413012
+            },
+            {
+                'to_timestamp': '2015-09-03T17:00:00',
+                'from_timestamp': '2015-09-03T16:00:00',
+                'value': 161988
+            },
+                ...
+        ]
+    }
+  #+END_SRC
+   
+** What does the DB&A contribute with?
+   - A reference implementation of a compositional web service for
+     multi-deployment in a service-oriented architecture (SOA).
+
+   - A data model that considers deployment scenarios when acquiring meter data
+     from residential homes.
+
+   - A set of analytic functions useful for get common views of electric meter
+     data.
