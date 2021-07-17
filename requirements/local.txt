@@ -12,8 +12,8 @@ flake8==2.4.1
 psycopg2==2.6
 
 # dynamtic testing 
-Werkzeug==0.10.4
-django-debug-toolbar==1.2.2
+werkzeug>=0.15.3
+django-debug-toolbar==1.11.1
 
 # improved REPL
 ipython==4.0.0
