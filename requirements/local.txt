@@ -16,7 +16,7 @@ werkzeug>=0.15.3
 django-debug-toolbar==1.11.1
 
 # improved REPL
-ipython==4.0.0
+ipython==7.16.3
 ipdb
 
 # editor specific
